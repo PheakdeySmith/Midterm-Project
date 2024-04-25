@@ -1,0 +1,81 @@
+﻿@model Supplier
+
+
+<div class="right_col" role="main">
+	<div class="">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="title_left">
+						<h3>Edit Supplier</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 ">
+				<div class="x_panel">
+					<div class="x_content">
+						<br />
+						<form asp-action="Edit" method="post" asp-route-id="@Model.Id" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+							<div class="item form-group">
+								<label asp-for="Name" class="col-form-label col-md-3 col-sm-3 label-align" for="Name">
+									Supplier Name <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input type="text" id="name" asp-for="Name" required="required" class="form-control ">
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label asp-for="ContactPerson" class="col-form-label col-md-3 col-sm-3 label-align" for="ContactPerson">
+									Contact Person <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input type="text" id="ContactPerson" asp-for="ContactPerson" required="required" class="form-control ">
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label asp-for="Email" class="col-form-label col-md-3 col-sm-3 label-align" for="Email">
+									Email <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input type="text" id="Email" asp-for="Email" required="required" class="form-control ">
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label asp-for="Phone" class="col-form-label col-md-3 col-sm-3 label-align" for="Phone">
+									Phone <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input type="text" id="Phone" asp-for="Phone" required="required" class="form-control ">
+								</div>
+							</div>
+
+							<div class="item form-group">
+								<label asp-for="Address" class="col-form-label col-md-3 col-sm-3 label-align" for="Address">
+									Address <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input type="text" id="Address" asp-for="Address" required="required" class="form-control ">
+								</div>
+							</div>
+
+							<div class="ln_solid"></div>
+							<div class="item form-group">
+								<div class="col-md-6 col-sm-6 offset-md-3">
+									<a asp-controller="Supplier" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+									<button type="submit" class="btn btn-success">Update</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

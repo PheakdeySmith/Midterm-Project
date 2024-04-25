@@ -1,0 +1,127 @@
+﻿@model List<Product>
+
+@section DatatableCss {
+    <!-- Bootstrap -->
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <!-- iCheck -->
+    <link href="~/assets/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+
+    <link href="~/assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+}
+
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="title_left">
+                        <h3>Product Table</h3>
+                    </div>
+                </div>
+                <div class="col-md-6 pt-2">
+                    <div class="title_right text-right">
+                        <a asp-controller="Product" asp-action="Create" class="btn btn-success">New Product</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box table-responsive">
+                                <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Description</th>
+                                            <th>Quantity</th>
+                                            <th>Company Name</th>
+                                            <th>Category</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var obj in Model)
+                                        {
+                                            <tr>
+                                                <td>@obj.Name</td>
+                                                <td>@obj.Price</td>
+                                                <td>@obj.Description</td>
+                                                <td>@obj.StockQuantity</td>
+                                                <td>@obj.Supplier.Name</td>
+                                                <td>@obj.Category.Name</td>
+                                                <td>
+                                                    <div class="w-75 btn-group" role="group">
+                                                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@obj.Id"
+                                                           class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Edit</a>
+                                                        <a href="#" data-toggle="modal" data-target="#deleteModal-@obj.Id" class="btn btn-danger mx-2"><i class="bi bi-trash"></i> Delete</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <div class="modal fade" id="deleteModal-@obj.Id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel-@obj.Id" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="deleteModalLabel-@obj.Id">Confirm Deletion</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete this category?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <!-- Form for deletion -->
+                                                            <form asp-action="Delete" asp-route-id="@obj.Id" method="post">
+                                                                <!-- Add anti-forgery token for security -->
+                                                                @Html.AntiForgeryToken()
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section DatatableScript {
+    <!-- iCheck -->
+    <script src="~/assets/vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="~/assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="~/assets/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="~/assets/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="~/assets/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/assets/vendors/pdfmake/build/vfs_fonts.js"></script>
+}

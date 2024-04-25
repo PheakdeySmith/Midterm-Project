@@ -1,0 +1,102 @@
+﻿@model Product
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="title_left">
+                        <h3>Edit Product</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <br />
+                        <!-- Form for editing product -->
+                        <form asp-action="Edit" method="post" id="edit-product-form" data-parsley-validate class="form-horizontal form-label-left">
+                            <!-- Hidden field for Product Id -->
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="item form-group">
+                                <label asp-for="Name" class="col-form-label col-md-3 col-sm-3 label-align" for="Name">
+                                    Product Name <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="name" asp-for="Name" required="required" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label asp-for="Price" class="col-form-label col-md-3 col-sm-3 label-align" for="Price">
+                                    Price <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="number" id="Price" asp-for="Price" required="required" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label asp-for="StockQuantity" class="col-form-label col-md-3 col-sm-3 label-align" for="StockQuantity">
+                                    Stock Quantity <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="number" id="StockQuantity" asp-for="StockQuantity" required="required" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label asp-for="SupplierId" class="col-form-label col-md-3 col-sm-3 label-align" for="SupplierId">
+                                    Company Name <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select asp-for="SupplierId" class="form-control" name="SupplierId">
+                                        @foreach (var supplier in ViewData["Suppliers"] as List<Supplier>)
+                                        {
+                                            <option value="@supplier.Id">@supplier.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label asp-for="CategoryId" class="col-form-label col-md-3 col-sm-3 label-align" for="CategoryId">
+                                    Category <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select asp-for="CategoryId" class="form-control" name="CategoryId">
+                                        @foreach (var category in ViewData["Categories"] as List<Category>)
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label asp-for="Description" class="col-form-label col-md-3 col-sm-3 label-align" for="description">
+                                    Description <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <textarea id="description" asp-for="Description" required="required" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
